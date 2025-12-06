@@ -1,0 +1,24 @@
+:root {
+  --bs-primary: indigo;
+  --bs-primary-rgb: 75, 0, 130;
+  
+  --bs-border-color: indigo;
+  --bs-border-color-translucent: rgba(75, 0, 130, 0.3);
+  
+  --bs-link-color: indigo;
+  --bs-link-hover-color: rgb(163, 19, 163);
+}
+
+.btn-primary {
+  background-color: indigo !important;
+  border-color: indigo !important;
+}
+
+.btn-primary:hover {
+  background-color: rgb(163, 19, 163) !important;
+  border-color: rgb(163, 19, 163) !important;
+}
+
+.border, .card, .navbar, .btn {
+  border-color: var(--bs-border-color) !important;
+}

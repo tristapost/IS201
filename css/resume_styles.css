@@ -1,0 +1,89 @@
+section, .Education, .exp, .accomplishments {
+padding: 20px;
+margin: 20px 0;
+border-radius: 10px;
+box-shadow: 0 2px 8px indigo;
+}
+
+
+/* Navigation menu styling */
+nav ul {
+display: flex;
+gap: 20px;
+list-style: none;
+padding: 0;
+justify-content: center;
+margin-bottom: 30px;
+}
+
+
+nav ul li a {
+text-decoration: none;
+font-weight: bold;
+padding: 8px 14px;
+border-radius: 6px;
+transition: 0.3s;
+color: indigo;
+}
+
+
+nav ul li a:hover {
+background: #e3e3e3;
+}
+
+
+/* Button styling for Back to Top */
+footer a {
+display: inline-block;
+padding: 10px 20px;
+background: indigo;
+color: white;
+text-decoration: none;
+border-radius: 8px;
+transition: 0.3s;
+}
+
+
+footer a:hover {
+background: rgb(163, 19, 163);
+}
+
+
+/* Optional: body spacing + font */
+body {
+font-family: Arial, sans-serif;
+background: #f5f5f5;
+margin: 0;
+padding: 20px;
+}
+
+
+header h1 {
+text-align: center;
+margin-bottom: 5px;
+color: indigo;
+}
+
+
+header p {
+text-align: center;
+margin-top: 0;
+}
+
+.home {
+    display:inline-block;
+    padding: 10px 20px;
+    background: indigo;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    position: absolute; /* ensures it stays at the top-left */
+    top: 20px;          /* distance from top */
+    left: 20px;         /* distance from left */
+    z-index: 1000;      /* ensures it sits above other elements */
+}
+
+.home:hover {
+  background: rgb(163, 19, 163);     
+}
