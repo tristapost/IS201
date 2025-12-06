@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baking Wordle</title>
+<a href="recipes.html" class="back">Back to Recipes</a>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(182, 182, 238); /* light yellow like flour */
+    text-align: center;
+    padding: 20px;
+  }
+  h1 {
+    color: indigo; /* chocolate color */
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-gap: 5px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .cell {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ccc;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+  .correct { background-color: #6aaa64; color: white; }
+  .present { background-color: #c9b458; color: white; }
+  .absent { background-color: #787c7e; color: white; }
+  input {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    width: 100px;
+    text-align: center;
+  }
+  button {
+    font-size: 1em;
+    padding: 5px 15px;
+    margin-left: 10px;
+  }
+  #message {
+    font-size: 1.2em;
+    color: #d2691e;
+    margin-top: 15px;
+  }
+
+  .back-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #d2691e; /* chocolate color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.back-button:hover {
+  background-color: #a0522d; /* darker chocolate on hover */
+  transform: scale(1.05);
+}
+</style>
+</head>
+<body>
+<h1>Baking Wordle 🍰</h1>
+
+<div class="grid" id="grid"></div>
+
+<input type="text" id="guessInput" maxlength="5">
+<button onclick="submitGuess()">Guess</button>
+
+<div id="message"></div>
+
+<script>
+const bakingWords = ["FLOUR","SUGAR","EGGWH","YEAST","DOUGH","BUNNY","BREAD","CREAM","COCOA","ICING"];
+const answer = bakingWords[Math.floor(Math.random() * bakingWords.length)];
+let currentRow = 0;
+
+const grid = document.getElementById("grid");
+
+// create 6 rows of 5 cells
+for (let i = 0; i < 6*5; i++) {
+  const cell = document.createElement("div");
+  cell.classList.add("cell");
+  grid.appendChild(cell);
+}
+
+function submitGuess() {
+  const input = document.getElementById("guessInput");
+  let guess = input.value.toUpperCase();
+  if (guess.length !== 5) {
+    alert("Please enter a 5-letter word!");
+    return;
+  }
+
+  const start = currentRow * 5;
+  const end = start + 5;
+  const cells = grid.children;
+
+  let answerCopy = answer.split("");
+
+  // First pass: correct letters
+  for (let i = 0; i < 5; i++) {
+    cells[start + i].textContent = guess[i];
+    if (guess[i] === answer[i]) {
+      cells[start + i].classList.add("correct");
+      answerCopy[i] = null;
+    }
+  }
+
+  // Second pass: present letters
+  for (let i = 0; i < 5; i++) {
+    if (!cells[start + i].classList.contains("correct")) {
+      if (answerCopy.includes(guess[i])) {
+        cells[start + i].classList.add("present");
+        answerCopy[answerCopy.indexOf(guess[i])] = null;
+      } else {
+        cells[start + i].classList.add("absent");
+      }
+    }
+  }
+
+  currentRow++;
+  input.value = "";
+
+  if (guess === answer) {
+    document.getElementById("message").textContent = "🎉 You guessed it! The word was " + answer;
+  } else if (currentRow === 6) {
+    document.getElementById("message").textContent = "😢 Game over! The word was " + answer;
+  }
+}
+</script>
+</body>
+</html>
